@@ -19,12 +19,20 @@ document.getElementById('currency-form').addEventListener('submit', function(eve
     fetch(apiURL + fromCurrency)
         .then(response => response.json())
         .then(data => {
+            // Verificar si la solicitud fue exitosa
             if (data.result === 'success') {
+                // Obtener la tasa de conversión hacia la divisa de destino
                 let rate = data.conversion_rates[toCurrency];
-                let convertedAmount = (amount * rate).toFixed(2);
                 
-                document.getElementById('result').innerHTML = 
-                    `${amount} ${fromCurrency} equivale a ${convertedAmount} ${toCurrency}`;
+                // Comprobar si existe la tasa de cambio entre las divisas
+                if (rate) {
+                    let convertedAmount = (amount * rate).toFixed(2);
+                    document.getElementById('result').innerHTML = 
+                        `${amount} ${fromCurrency} equivale a ${convertedAmount} ${toCurrency}`;
+                } else {
+                    document.getElementById('result').innerHTML = 
+                        'No se pudo encontrar la tasa de cambio para la moneda seleccionada.';
+                }
             } else {
                 document.getElementById('result').innerHTML = 'Error al obtener los tipos de cambio.';
             }
