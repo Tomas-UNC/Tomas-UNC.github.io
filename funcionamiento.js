@@ -24,7 +24,7 @@ document.getElementById('currency-form').addEventListener('submit', function(eve
                 let convertedAmount = (amount * rate).toFixed(2);
                 
                 document.getElementById('result').innerHTML = 
-                    ${amount} ${fromCurrency} equivale a ${convertedAmount} ${toCurrency};
+                    `${amount} ${fromCurrency} equivale a ${convertedAmount} ${toCurrency}`;
             } else {
                 document.getElementById('result').innerHTML = 'Error al obtener los tipos de cambio.';
             }
