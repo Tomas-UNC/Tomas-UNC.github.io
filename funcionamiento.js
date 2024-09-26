@@ -1,6 +1,6 @@
 // Clave de API (asegúrate de cambiarla por tu propia API key)
 const apiKey = '8f2073b4eebe95b9b6f0b641beb529aa';
-const apiURL = 'http://data.fixer.io/api/' + apiKey + '/latest/';
+const apiURL = 'http://data.fixer.io/api/latest;
 
 // Función para manejar la conversión de divisas
 document.getElementById('currency-form').addEventListener('submit', function(event) {
