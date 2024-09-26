@@ -16,24 +16,15 @@ document.getElementById('currency-form').addEventListener('submit', function(eve
     }
 
     // Realizar la solicitud a la API para obtener los tipos de cambio
-    fetch(apiURL)
+    fetch(apiURL + fromCurrency)
         .then(response => response.json())
         .then(data => {
-            if (data.success) {
-                // Obtener las tasas de cambio con base en EUR
-                let fromRate = data.rates[fromCurrency];
-                let toRate = data.rates[toCurrency];
-
-                // Comprobar si existen las tasas de cambio para las monedas seleccionadas
-                if (fromRate && toRate) {
-                    // Convertir primero de la moneda base (EUR) a la moneda origen y luego a la moneda destino
-                    let convertedAmount = (amount / fromRate * toRate).toFixed(2);
-                    document.getElementById('result').innerHTML = 
-                        `${amount} ${fromCurrency} equivale a ${convertedAmount} ${toCurrency}`;
-                } else {
-                    document.getElementById('result').innerHTML = 
-                        'No se pudo encontrar la tasa de cambio para las monedas seleccionadas.';
-                }
+            if (data.result === 'success') {
+                let rate = data.conversion_rates[toCurrency];
+                let convertedAmount = (amount * rate).toFixed(2);
+                
+                document.getElementById('result').innerHTML = 
+                    ${amount} ${fromCurrency} equivale a ${convertedAmount} ${toCurrency};
             } else {
                 document.getElementById('result').innerHTML = 'Error al obtener los tipos de cambio.';
             }
